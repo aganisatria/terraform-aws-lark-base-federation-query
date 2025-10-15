@@ -5,7 +5,6 @@ This example demonstrates how to use the Lark Base Federation Query Terraform mo
 ## Prerequisites
 
 - Terraform v1.0 or later
-- An AWS account with the necessary permissions
 
 ## Usage
 
@@ -50,7 +49,6 @@ This example demonstrates how to use the Lark Base Federation Query Terraform mo
 
 | Name                       | Description                                          | Type         | Default                        |
 | -------------------------- | ---------------------------------------------------- | ------------ | ------------------------------ |
-| `aws_region`               | AWS region to deploy the stack.                      | `string`     | `"us-east-1"`                  |
 | `stack_name`               | Name of the stack.                                   | `string`     | `"lark-base-federation-query"` |
 | `spill_bucket`             | Name of the S3 bucket for Athena query spillage.     | `string`     | n/a                            |
 | `spill_prefix`             | Prefix for Athena query spillage in the S3 bucket.   | `string`     | `"athena-spill"`               |
