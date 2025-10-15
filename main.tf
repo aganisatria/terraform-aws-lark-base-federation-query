@@ -1,5 +1,5 @@
 module "lark_secret" {
-  source = "./modules/secretManager"
+  source = "./modules/secret_manager"
   count  = 1
 
   create_secret       = local.create_lark_app_secret
