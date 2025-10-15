@@ -25,7 +25,7 @@ output "crawler_lambda_role_arn" {
 
 output "lark_app_secret_arn" {
   description = "ARN of the Lark Application ID secret (only if created by this deployment)"
-  value       = module.lark_secret.created ? module.lark_secret.secret_arn : null
+  value       = module.lark_secret[0].created ? module.lark_secret[0].secret_arn : null
 }
 
 output "kms_policy_arn" {
