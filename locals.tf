@@ -8,8 +8,8 @@ locals {
     StackName = var.stack_name
   })
 
-  lark_secret_reference = module.lark_secret.created ? module.lark_secret.secret_arn : var.lark_app_secret_manager
-  lark_secret_env_value = module.lark_secret.created ? module.lark_secret.secret_name : var.lark_app_secret_manager
+  lark_secret_reference = module.lark_secret[0].created ? module.lark_secret[0].secret_arn : var.lark_app_secret_manager
+  lark_secret_env_value = module.lark_secret[0].created ? module.lark_secret[0].secret_name : var.lark_app_secret_manager
 
   athena_connector_role_arn = local.create_athena_connector_role ? module.athena_connector_role[0].role_arn : var.lambda_athena_connector_role_arn
   lark_base_crawler_role_arn = local.create_lark_base_crawler_role ? module.crawler_lambda_role[0].role_arn : var.lambda_lark_base_crawler_role_arn
@@ -37,7 +37,7 @@ locals {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
-        Resource = "arn:${data.aws_partition.current.partition}:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.stack_name}-AthenaConnector:*"
+        Resource = "arn:${data.aws_partition.current.partition}:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.stack_name}-AthenaConnector:*"
       },
       {
         Effect = "Allow",
@@ -88,7 +88,7 @@ locals {
           "logs:CreateLogStream",
           "logs:PutLogEvents"
         ],
-        Resource = "arn:${data.aws_partition.current.partition}:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.stack_name}-CrawlerFunction:*"
+        Resource = "arn:${data.aws_partition.current.partition}:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:log-group:/aws/lambda/${var.stack_name}-CrawlerFunction:*"
       },
       {
         Effect   = "Allow",
@@ -133,7 +133,7 @@ locals {
           "kms:GenerateDataKey*"
         ],
         Effect   = "Allow",
-        Resource = "arn:${data.aws_partition.current.partition}:kms:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:key/${var.kms_key_id}"
+        Resource = "arn:${data.aws_partition.current.partition}:kms:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:key/${var.kms_key_id}"
       }
     ]
   })

@@ -14,11 +14,6 @@ variable "permissions_boundary_arn" {
   default     = null
 }
 
-variable "managed_policy_arns" {
-  description = "(Optional) List of managed policy ARNs to attach to the role."
-  type        = list(string)
-  default     = []
-}
 
 variable "tags" {
   description = "Tags to apply to the role."
